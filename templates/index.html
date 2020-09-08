@@ -18,8 +18,8 @@
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}" method="post" enctype="multipart/form-data">
     	<input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" required="required" />
-      <input type="text" name="scale" placeholder="scale" required="required" />
-		  <input type="text" name="image_type" placeholder="image_type" required="required" />
+      <!-- <input type="text" name="scale" placeholder="scale" required="required" /> -->
+		  <input type="text" name="image_type" placeholder="0 for mobile;1 for other" required="required" />
       
       <button type="submit" class="btn btn-primary btn-block btn-large">Convert</button>
     </form>

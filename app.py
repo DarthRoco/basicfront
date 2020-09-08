@@ -19,7 +19,7 @@ def predict():
         # Get the file from post request
         #f = request.files['file']
         f1 = request.files['file']
-        f2 = request.form.get('scale')
+        # f2 = request.form.get('scale')
         f3 = request.form.get('image_type')
         
         # Save the file to ./uploads
@@ -31,9 +31,17 @@ def predict():
        
         
         output_path = os.path.join(basepath, 'static', secure_filename(f1.filename))
-        
-        
-        r = requests.post("http://ec2-18-191-233-204.us-east-2.compute.amazonaws.com:8080/predictions/super_res",files={'data':open(file_path,'rb')})
+        #URL PROCESSING
+        instance_url="ec2-3-128-205-124.us-east-2.compute.amazonaws.com"
+        processed_url="http://"+instance_url+":8080/predictions"
+        if f3:
+        	url_final=processed_url+"/super_res"
+        else:
+        	url_final=processed_url+"/super_reslq"
+
+
+        r = requests.post(url_final,files={'data':open(file_path,'rb')})
+
         #print(r.content,"HEioowhd---------------------------")
         imgdata = base64.b64decode(r.content)
         with open(output_path, 'wb') as f:

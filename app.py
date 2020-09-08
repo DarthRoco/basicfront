@@ -32,7 +32,7 @@ def predict():
         
         output_path = os.path.join(basepath, 'static', secure_filename(f1.filename))
         #URL PROCESSING
-        instance_url="ec2-18-191-222-49.us-east-2.compute.amazonaws.com"
+        instance_url="ec2-18-218-132-99.us-east-2.compute.amazonaws.com"
         processed_url="http://"+instance_url+":8080/predictions"
         if f3:
         	url_final=processed_url+"/super_res"

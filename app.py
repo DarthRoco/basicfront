@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template,send_file,redirect
 #from model import model_predict
 import os
 from werkzeug.utils import secure_filename
@@ -42,13 +42,14 @@ def predict():
 
         r = requests.post(url_final,files={'data':open(file_path,'rb')})
 
-        #print(r.content,"HEioowhd---------------------------")
+        # print(r.content,"HEioowhd---------------------------")
         imgdata = base64.b64decode(r.content)
         with open(output_path, 'wb') as f:
         	f.write(imgdata)
         #r.content.save(output_path)
         
-        return render_template('index.html', HR_output = url_for('static', filename = secure_filename(f1.filename))) #https://stackoverflow.com/questions/46785507/python-flask-display-image-on-a-html-page
+        # return render_template('index.html', HR_output = url_for('static', filename = secure_filename(f1.filename))) #https://stackoverflow.com/questions/46785507/python-flask-display-image-on-a-html-page
+        return send_file(filename_or_fp=output_path,as_attachment=True)   
     return 'OK'
 
 
